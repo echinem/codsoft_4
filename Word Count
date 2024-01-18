@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
+
+int wordCount(string name){
+    int count = 0;
+    ifstream inpFile(name);
+    if(!inpFile.is_open()){
+        return -1;
+    }else{
+        string word;
+        while(inpFile >> word){
+            count ++;
+        }
+    }
+    return count;
+}
+
+void count(){
+    string fileName;
+    int count = 0;
+    cout << endl << "Enter file name with full path: ";
+    cin.ignore();
+    getline(cin, fileName);
+    count = wordCount(fileName);
+    if(count==-1){
+        cout << "\n!=====! FILE DOES NOT EXIST. ENTER AN EXISTING FILE. !=====!\n\n";
+    }else{
+        cout << "Total words in file: " << count << endl;
+    } 
+}
+
+void Menu(){
+    int choice = 0;
+    while(choice != 2){
+        cout << endl << "[1] FIND WORD COUNT\n[2] EXIT" << endl;
+        cout << "Enter choice: " << endl;
+        cin >> choice;
+        if(choice==1){
+            count();
+        }
+        else if(choice == 2){
+            cout << "EXITING" << endl;
+        }
+        else{
+            cout << "ENTER A VALID OPTION" << endl;
+        }
+    }
+}
+int main(){
+    cout << "===== WORD COUNT =====" << endl;
+    Menu();
+    return 0;
+}
